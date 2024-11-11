@@ -1,4 +1,4 @@
-function gradient(a,b,c,num_elements, num_iteration, alfa)
+function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     x = 1:1:num_elements;
     y = a * x + b * randn(1, num_elements);
     y = y + c;

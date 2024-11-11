@@ -103,3 +103,22 @@ for i = 1:length(sets)
     % Wywołanie funkcji gradient_desc
     gradient_desc(a, b, c, num_elements, num_iteration, alfa);
 end
+
+%% Logistic Regression
+
+for i = 1:length(sets)
+    % Pobieranie parametrów z aktualnego zestawu
+    a = sets{i}(1);
+    b = sets{i}(2);
+    c = sets{i}(3);
+
+    figure(i);
+    set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
+
+    % Tytuł główny dla całej figury
+    sgtitle(['Zestaw ', num2str(i), ' - ', set_names{i}]);
+
+    % Wywołanie funkcji logistic_regression
+    logistic_regression(num_elements, a, b, c);
+
+end

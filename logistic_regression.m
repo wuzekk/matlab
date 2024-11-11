@@ -2,9 +2,6 @@ function [params_optim, R2_1, R2_2] = logistic_regression(num_elements, a, b, c)
 
     % Function to perform logistic regression on generated random data
 
-    close all;
-    clc;
-
     x = linspace(0, 1, num_elements);
     y = a * x + b * randn(1, num_elements);
     y = y + c;
@@ -23,7 +20,7 @@ function [params_optim, R2_1, R2_2] = logistic_regression(num_elements, a, b, c)
 
 
     % Plot original data
-    figure(1)
+    subplot(3, 1, 1);
     plot(x, y, '*', 'LineWidth', 3);
     grid on;
     xlabel('x');
@@ -47,7 +44,7 @@ function [params_optim, R2_1, R2_2] = logistic_regression(num_elements, a, b, c)
     ye1 = logsig(params_optim(1) * X(:, 1) + params_optim(2) * X(:, 2));
     R2_1 = 1 - sum((y - ye1').^2) / sum((y - mean(y)).^2);
 
-    figure(2)
+    subplot(3, 1, 2);
     plot(x, y, '*', 'LineWidth', 3);
     grid on;
     hold on;
@@ -66,7 +63,7 @@ function [params_optim, R2_1, R2_2] = logistic_regression(num_elements, a, b, c)
 
     
     % Plot the fit for the second data set
-    figure(3)
+    subplot(3, 1, 3);
     plot(x, y, '*', 'LineWidth', 3);
     grid on;
     hold on;

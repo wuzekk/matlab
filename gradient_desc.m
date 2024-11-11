@@ -12,7 +12,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     A_copy = A;
     
     %wykres dla stalej wartości alfa
-    figure(1);
+    subplot(3, 2, 1);
     grid on;
     hold on;
     xlabel('x');
@@ -20,7 +20,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     title('const alfa values graph');
 
     %wykres dla wartości błędu
-    figure(2);
+    subplot(3, 2, 2);
     grid on;
     hold on;
     xlabel('x');
@@ -31,7 +31,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
     for i=1:1:num_iteration
 
-       figure(1);plot(i,alfa,'or');
+       subplot(3, 2, 1);plot(i,alfa,'or');
 
        for n_data = 1:length(X)
            ye = X(n_data,:) * A;
@@ -43,11 +43,11 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
        ye=X*A;
        element = mse(Y,ye);
 
-       figure(2);
+       subplot(3, 2, 2);
        plot(i,element,'*m')
     end
 
-    figure(3);
+    subplot(3, 2, 3);
     plot(x, y, 'bo'); 
     hold on;
     plot(x, X * A, 'r-'); 
@@ -61,7 +61,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     % ze zmienną wersja alfa    
     A = A_copy;
     %wykres dla stalej wartości alfa
-    figure(4);
+    subplot(3, 2, 4);
     grid on;
     hold on;
     xlabel('x');
@@ -69,7 +69,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     title('var alfa values graph');
 
     %wykres dla wartości błędu
-    figure(5);
+    subplot(3, 2, 5);
     grid on;
     hold on;
     xlabel('x');
@@ -82,7 +82,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
         alfa = length(X) / (1.0 + (i * length(X))) * 0.001;
 
-        figure(4);plot(i,alfa,'or');
+        subplot(3, 2, 4);plot(i,alfa,'or');
 
         for n_data = 1:length(X)
             ye = X(n_data,:) * A;
@@ -94,11 +94,11 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
         ye=X*A;
         element = mse(Y,ye);
 
-        figure(5);
+        subplot(3, 2, 5);
         plot(i,element,'*m')
     end
 
-    figure(6);
+    subplot(3, 2, 6);
     plot(x, y, 'bo'); 
     hold on;
     plot(x, X * A, 'r-'); 

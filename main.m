@@ -9,6 +9,7 @@ num_elements = 100;
 y_min = -50; 
 y_max = 300;
 
+%% Multiple Linear Regression
 % Przygotowanie figure z podziałem na 4 subploty
 figure;
 set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
@@ -35,6 +36,7 @@ end
 % Tytuł główny dla całej figury
 sgtitle('Multiple Linear Regression');
 
+%% Linear Regression
 % Pętla po zestawach parametrów dla drugiej części analizy
 for i = 1:length(sets)
     % Pobieranie parametrów z aktualnego zestawu
@@ -82,4 +84,22 @@ for i = 1:length(sets)
     polynomial_regression(a, b, c, d, num_elements);
 end
 
-%% 
+%% Gradient descent (dziwnie wygladaja te wykresy :/)
+alfa = 0.000001; 
+num_iteration = 50;
+
+for i = 1:length(sets)
+    % Pobieranie parametrów z aktualnego zestawu
+    a = sets{i}(1);
+    b = sets{i}(2);
+    c = sets{i}(3);
+
+    figure;
+    set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
+
+    % Tytuł główny dla całej figury
+    sgtitle(['Zestaw ', num2str(i), ' - ', set_names{i}]);
+
+    % Wywołanie funkcji gradient_desc
+    gradient_desc(a, b, c, num_elements, num_iteration, alfa);
+end

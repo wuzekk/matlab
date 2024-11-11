@@ -12,7 +12,7 @@ function polynomial_regression(a,b,c,d,num_elements)
     ye3 = X * B3;
 
     % ploting for 2nd degree
-    figure(1);
+    subplot(3, 2, 1);
     plot(x, y, '*', 'LineWidth', 3); grid; hold on;
     xlabel('x'); ylabel('y');
     plot(x, ye3, 'k', 'LineWidth', 3);
@@ -27,9 +27,9 @@ function polynomial_regression(a,b,c,d,num_elements)
     xt = 1:0.5:num_elements;
     yt = polyval(w, xt);
 
-    figure(2);
-    plot(xt, yt, 'k', 'LineWidth', 3); grid; hold on;
-    plot(x, y, '*', 'LineWidth', 3);
+    subplot(3, 2, 2);
+    plot(x, y, '*', 'LineWidth', 3); grid; hold on;
+    plot(xt, yt, 'k', 'LineWidth', 3); 
     xlabel('x'); ylabel('y');
     title('Polynomial fit degree - 1');
     legend('Polynomial values', 'Original data');
@@ -39,10 +39,10 @@ function polynomial_regression(a,b,c,d,num_elements)
     w = polyfit(x, y, 2);
     yt = polyval(w, xt);
 
-    figure(3);
-    plot(xt, yt, 'k', 'LineWidth', 3); grid; hold on;
-    plot(x, y, '*', 'LineWidth', 3);
-    xlabel('x'); ylabel('y');
+    subplot(3, 2, 3);
+    plot(x, y, '*', 'LineWidth', 3); grid; hold on;
+    plot(xt, yt, 'k', 'LineWidth', 3); 
+        xlabel('x'); ylabel('y');
     title('Polynomial fit degree - 2');
     legend('Polynomial values', 'Original data');
 
@@ -51,11 +51,11 @@ function polynomial_regression(a,b,c,d,num_elements)
     [w, D] = polyfit(x, y, 1);
     [ye, D1] = polyval(w, x, D);
 
-    figure(4);
+    subplot(3, 2, 4);
     plot(x, y, '*k', 'LineWidth', 3); grid; hold on;
-    plot(x, ye, 'r', 'LineWidth', 3);
-    plot(x, ye - 1 * D1, 'g', 'LineWidth', 3);
-    plot(x, ye + 1 * D1, 'g', 'LineWidth', 3);
+    plot(x, ye - 1 * D1, 'g', 'LineWidth', 2);
+    plot(x, ye + 1 * D1, 'g', 'LineWidth', 2);
+    plot(x, ye, 'r', 'LineWidth', 1);
     xlabel('x'); ylabel('y');
     title("Regression with Confidence Bounds");
     legend('Original values', 'Regression line', 'Bounds');
@@ -72,7 +72,7 @@ function polynomial_regression(a,b,c,d,num_elements)
     B = X \ Y;           % Obliczanie współczynników
     ye = X * B;          % Predykcja wartości y za pomocą modelu
 
-    figure(5);
+    subplot(3, 2, 5);
     plot(x, y, '*k', 'LineWidth', 3); grid; hold on;
     plot(x, ye, 'r', 'LineWidth', 3);
     xlabel('x'); ylabel('y');

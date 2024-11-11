@@ -61,3 +61,25 @@ for i = 1:length(sets)
     disp(['R^2 for linear regression (slope and intercept): ', num2str(R22)]);
     disp(['R^2 for manual linear regression calculation: ', num2str(R23)]);
 end
+
+%% Polynomial regression
+
+d = 1; % przykladowa wartosc
+
+for i = 1:length(sets)
+    % Pobieranie parametrów z aktualnego zestawu
+    a = sets{i}(1);
+    b = sets{i}(2);
+    c = sets{i}(3);
+
+    figure;
+    set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
+
+    % Tytuł główny dla całej figury
+    sgtitle(['Zestaw ', num2str(i), ' - ', set_names{i}]);
+
+    % Wywołanie funkcji polynomial_regression
+    polynomial_regression(a, b, c, d, num_elements);
+end
+
+%% 

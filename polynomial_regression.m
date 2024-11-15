@@ -1,4 +1,4 @@
-function polynomial_regression(a,b,c,d,num_elements)
+function polynomial_regression(a, b, c, d, num_elements)
 
     x = 1:1:num_elements;
     y = a * x + b * ((x + randn(1, num_elements)) .^ d);
@@ -20,7 +20,7 @@ function polynomial_regression(a,b,c,d,num_elements)
 
     % R^2 for 2nd degree
     R2_3 = 1 - sum((y - ye3') .^ 2) / sum((y - mean(y)) .^ 2);
-    disp('R^2 for polynomial regression of degree 2');disp(R2_3);
+    fprintf('R^2 for polynomial regression of degree 2: %d \n', R2_3);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % for 1st deegree
     w = polyfit(x, y, 1);
@@ -29,7 +29,7 @@ function polynomial_regression(a,b,c,d,num_elements)
 
     subplot(3, 2, 2);
     plot(x, y, '*', 'LineWidth', 3); grid; hold on;
-    plot(xt, yt, 'k', 'LineWidth', 3); 
+    plot(xt, yt, 'k', 'LineWidth', 3);
     xlabel('x'); ylabel('y');
     title('Polynomial fit degree - 1');
     legend('Polynomial values', 'Original data');
@@ -41,8 +41,8 @@ function polynomial_regression(a,b,c,d,num_elements)
 
     subplot(3, 2, 3);
     plot(x, y, '*', 'LineWidth', 3); grid; hold on;
-    plot(xt, yt, 'k', 'LineWidth', 3); 
-        xlabel('x'); ylabel('y');
+    plot(xt, yt, 'k', 'LineWidth', 3);
+    xlabel('x'); ylabel('y');
     title('Polynomial fit degree - 2');
     legend('Polynomial values', 'Original data');
 
@@ -68,9 +68,9 @@ function polynomial_regression(a,b,c,d,num_elements)
     Y = y';
 
     % Tworzenie macierzy X dla wielomianu 2. stopnia
-    X = [ones(size(x')) x' (x').^2];
-    B = X \ Y;           % Obliczanie współczynników
-    ye = X * B;          % Predykcja wartości y za pomocą modelu
+    X = [ones(size(x')) x' (x') .^ 2];
+    B = X \ Y; % Obliczanie współczynników
+    ye = X * B; % Predykcja wartości y za pomocą modelu
 
     subplot(3, 2, 5);
     plot(x, y, '*k', 'LineWidth', 3); grid; hold on;

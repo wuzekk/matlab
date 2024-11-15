@@ -10,7 +10,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
     A = randn(2, 1);
     A_copy = A;
-    
+
     %wykres dla stalej wartości alfa
     subplot(3, 2, 1);
     grid on;
@@ -29,28 +29,28 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
     %glowny kod regresji metodą gradientową
 
-    for i=1:1:num_iteration
+    for i = 1:1:num_iteration
 
-       subplot(3, 2, 1);plot(i,alfa,'or');
+        subplot(3, 2, 1); plot(i, alfa, 'or');
 
-       for n_data = 1:length(X)
-           ye = X(n_data,:) * A;
-           e = (Y(n_data,:)-ye);
-           D_A = alfa * e * X(n_data,:)';
-           A = A + D_A;
-       end
-       
-       ye=X*A;
-       element = mse(Y,ye);
+        for n_data = 1:length(X)
+            ye = X(n_data, :) * A;
+            e = (Y(n_data, :) - ye);
+            D_A = alfa * e * X(n_data, :)';
+            A = A + D_A;
+        end
 
-       subplot(3, 2, 2);
-       plot(i,element,'*m')
+        ye = X * A;
+        element = mse(Y, ye);
+
+        subplot(3, 2, 2);
+        plot(i, element, '*m')
     end
 
     subplot(3, 2, 3);
-    plot(x, y, 'bo'); 
+    plot(x, y, 'bo');
     hold on;
-    plot(x, X * A, 'r-'); 
+    plot(x, X * A, 'r-');
     xlabel('x');
     ylabel('y');
     title('Original Data and Regression Line for const alfa');
@@ -58,7 +58,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
     grid on;
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % ze zmienną wersja alfa    
+    % ze zmienną wersja alfa
     A = A_copy;
     %wykres dla stalej wartości alfa
     subplot(3, 2, 4);
@@ -78,34 +78,33 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
     %glowny kod regresji metodą gradientową
 
-    for i=1:1:num_iteration
+    for i = 1:1:num_iteration
 
         alfa = length(X) / (1.0 + (i * length(X))) * 0.001;
 
-        subplot(3, 2, 4);plot(i,alfa,'or');
+        subplot(3, 2, 4); plot(i, alfa, 'or');
 
         for n_data = 1:length(X)
-            ye = X(n_data,:) * A;
-            e = (Y(n_data,:)-ye);
-            D_A = alfa * e * X(n_data,:)';
+            ye = X(n_data, :) * A;
+            e = (Y(n_data, :) - ye);
+            D_A = alfa * e * X(n_data, :)';
             A = A + D_A;
         end
 
-        ye=X*A;
-        element = mse(Y,ye);
+        ye = X * A;
+        element = mse(Y, ye);
 
         subplot(3, 2, 5);
-        plot(i,element,'*m')
+        plot(i, element, '*m')
     end
 
     subplot(3, 2, 6);
-    plot(x, y, 'bo'); 
+    plot(x, y, 'bo');
     hold on;
-    plot(x, X * A, 'r-'); 
+    plot(x, X * A, 'r-');
     xlabel('x');
     ylabel('y');
     title('Original Data and Regression Line for variable alfa');
     legend('Original Data', 'Regression Line');
     grid on;
 end
-

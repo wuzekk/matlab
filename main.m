@@ -4,7 +4,7 @@ IP = [7 2 9];
 MR = [7 5 7];
 sets = {AC, DP, IP, MR};
 set_names = {'AC', 'DP', 'IP', 'MR'};
-num_elements = 100;
+num_elements = 50; % zmienione dla testow
 
 y_min = -50;
 y_max = 300;
@@ -49,7 +49,7 @@ for i = 1:length(sets)
     set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
 
     % Tytuł główny dla całej figury
-    sgtitle(['Linear regression: ', 'Zestaw ', num2str(i), ' - ', set_names{i}]);
+    sgtitle(['Linear regression: ', 'Zestaw', num2str(i), ' - ', set_names{i}]);
 
     % Wywołanie funkcji linear_regression
     [R21, R22, R23] = linear_regression(a, b, c, num_elements);
@@ -78,7 +78,7 @@ for i = 1:length(sets)
     set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
 
     % Tytuł główny dla całej figury
-    sgtitle(['polynomial regression: ', 'Zestaw ', num2str(i), ' - ', set_names{i}]);
+    sgtitle(['polynomial regression: ', 'Zestaw', num2str(i), ' - ', set_names{i}]);
 
     % Wywołanie funkcji polynomial_regression
     fprintf('--- Zestaw %d - %s ---\n', i, set_names{i});
@@ -86,8 +86,9 @@ for i = 1:length(sets)
 end
 
 %% Gradient descent (dziwnie wygladaja te wykresy :/)
-alfa = 0.000001;
+alfa = 0.00001;
 num_iteration = 50;
+A = randn(2, 1);
 
 for i = 1:length(sets)
     % Pobieranie parametrów z aktualnego zestawu
@@ -99,10 +100,10 @@ for i = 1:length(sets)
     set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
 
     % Tytuł główny dla całej figury
-    sgtitle(['Gradient descent: ', 'Zestaw ', num2str(i), ' - ', set_names{i}]);
+    sgtitle(['Gradient descent: ', 'Zestaw', num2str(i), ' - ', set_names{i}]);
 
     % Wywołanie funkcji gradient_desc
-    gradient_desc(a, b, c, num_elements, num_iteration, alfa);
+    gradient_desc(a, b, c, num_elements, num_iteration, alfa, A);
 end
 
 %% Logistic Regression
@@ -117,7 +118,7 @@ for i = 1:length(sets)
     set(gcf, 'Position', [100, 100, 1200, 800]); % Ustawienie rozmiaru okna
 
     % Tytuł główny dla całej figury
-    sgtitle(['logistic regression: ', 'Zestaw ', num2str(i), ' - ', set_names{i}]);
+    sgtitle(['logistic regression: ', 'Zestaw', num2str(i), ' - ', set_names{i}]);
 
     % Wywołanie funkcji logistic_regression
     logistic_regression(num_elements, a, b, c);

@@ -1,4 +1,4 @@
-function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
+function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa, A)
     x = 1:1:num_elements;
     y = a * x + b * randn(1, num_elements);
     y = y + c;
@@ -8,7 +8,7 @@ function A = gradient_desc(a, b, c, num_elements, num_iteration, alfa)
 
     X = [ones(size(X)) X];
 
-    A = randn(2, 1);
+    %A = randn(2, 1);
     A_copy = A;
 
     %wykres dla stalej wartości alfa

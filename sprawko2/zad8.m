@@ -120,19 +120,40 @@ a = A(:)';
 in_data_train = [in_data_train;a];
 out_data_train = [out_data_train; 9];
 
+% newff
 zakres = [0 length(in_data_train)];
 liczba_n_h1 = 10;
 liczba_n_h2 = 50;
 liczba_n_o = 1;
-siec = newff([zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres], [liczba_n_h1 liczba_n_h2 liczba_n_o], {'tansig','tansig', 'purelin'}, 'trainlm');
-siec.trainParam.epochs = 150;
-siec.trainParam.goal = 1e-5;
+siec_ff = newff([zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres], [liczba_n_h1 liczba_n_h2 liczba_n_o], {'tansig','tansig', 'purelin'}, 'trainlm');
+siec_ff.trainParam.epochs = 150;
+siec_ff.trainParam.goal = 1e-5;
 
-siec = train(siec, in_data_train', out_data_train');
-ynn = sim(siec, in_data_train');
+[siec_ff, stats_ff] = train(siec_ff, in_data_train', out_data_train');
+ynn_ff = sim(siec_ff, in_data_train');
 
 figure;
+subplot(1, 2, 1)
 plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
-plot(ynn, 'x', MarkerSize=10);
-legend ('Wartości oczekiwane','Wartości przewidywane');
-title('Newff, MSE= ', num2str(mse(out_data_train, ynn)));
+plot(ynn_ff, 'x', MarkerSize=10);
+legend ('Input','Output');
+title('Newff', ['MSE = ', num2str(mean(((out_data_train'-ynn_ff).^2)))]);
+
+% newelm
+zakres = [0 length(in_data_train)];
+liczba_n_h1 = 10;
+liczba_n_h2 = 50;
+liczba_n_o = 1;
+siec_elm = newelm([zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres;zakres; zakres; zakres; zakres; zakres], [liczba_n_h1 liczba_n_h2 liczba_n_o], {'tansig','tansig', 'purelin'}, 'trainlm');
+siec_elm.trainParam.epochs = 150;
+siec_elm.trainParam.goal = 1e-5;
+
+[siec_elm, stats_elm] = train(siec_elm, in_data_train', out_data_train');
+ynn_elm = sim(siec_elm, in_data_train');
+
+subplot(1, 2, 2)
+plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
+plot(ynn_elm, 'x', MarkerSize=10);
+legend ('Input','Output');
+title('Newelm', ['MSE = ', num2str(mean(((out_data_train'-ynn_elm).^2)))]);
+

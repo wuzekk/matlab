@@ -1,4 +1,4 @@
-%zad1 newff + newelm + newrb+ newrbe
+%zad4 newff + newelm + newrb+ newrbe
 
 close all
 clear all

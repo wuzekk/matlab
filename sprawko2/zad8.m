@@ -169,8 +169,14 @@ for SPREAD = SPREAD_values
         MN = MN_values(idx);
 
         siec_rb = newrb(in_data_train', out_data_train', GOAL, SPREAD, MN, DF);
-        ynn_rb = siec_rb(in_data_train');
+        ynn_rb = sim(siec_rb, in_data_train');
         MSE_rb = mean(((out_data_train' - ynn_rb).^2));
+
+        % Znalezienie i zamknięcie okna 'NEWRB' (KLUCZOWA ZMIANA)
+        h = findobj('type','figure','name','NEWRB');
+        if ~isempty(h)
+            close(h);
+        end
         
         subplot(2, 2, idx);
         plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
@@ -181,7 +187,7 @@ for SPREAD = SPREAD_values
     sgtitle(['Analiza maksymalnej liczby neuronów (MN) sieci radialnej newrb dla SPREAD = ', num2str(SPREAD)]);
 end
 
-% newrbe
+%% newrbe
 for SPREAD = SPREAD_values
     figure;
     for idx = 1:length(MN_values)

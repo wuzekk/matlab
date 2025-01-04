@@ -172,7 +172,7 @@ for SPREAD = SPREAD_values
         ynn_rb = sim(siec_rb, in_data_train');
         MSE_rb = mean(((out_data_train' - ynn_rb).^2));
 
-        % Znalezienie i zamknięcie okna 'NEWRB' (KLUCZOWA ZMIANA)
+        % Znalezienie i zamkniecie okna 'NEWRB'
         h = findobj('type','figure','name','NEWRB');
         if ~isempty(h)
             close(h);

@@ -188,20 +188,17 @@ for SPREAD = SPREAD_values
 end
 
 %% newrbe
+idx = 1;
+figure;
 for SPREAD = SPREAD_values
-    figure;
-    for idx = 1:length(MN_values)
-        MN = MN_values(idx);
+    siec_rbe = newrbe(in_data_train', out_data_train', SPREAD);
+    ynn_rbe = siec_rbe(in_data_train');
+    MSE_rbe = mean(((out_data_train' - ynn_rbe).^2));
 
-        siec_rbe = newrbe(in_data_train', out_data_train', SPREAD);
-        ynn_rbe = siec_rbe(in_data_train');
-        MSE_rbe = mean(((out_data_train' - ynn_rbe).^2));
-
-        subplot(2, 2, idx);
-        plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
-        plot(ynn_rbe, 'x', MarkerSize=10);
-        legend('Target', 'Output');
-        title(['MN=', num2str(MN), ', MSE=', num2str(MSE_rbe)]);
-    end
-     sgtitle(['Analiza maksymalnej liczby neuronów (MN) sieci radialnej newrbe dla SPREAD = ', num2str(SPREAD)]);
+    subplot(2, 2, idx);
+    plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
+    plot(ynn_rbe, 'x', MarkerSize=10);
+    legend('Target', 'Output');
+    title(['Analiza sieci radialnej newrbe dla SPREAD = ', num2str(SPREAD)], ['MSE=', num2str(MSE_rbe)]);
+    idx = idx + 1;
 end

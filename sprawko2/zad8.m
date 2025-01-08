@@ -133,10 +133,10 @@ siec_ff = train(siec_ff, in_data_train', out_data_train');
 ynn_ff = sim(siec_ff, in_data_train');
 
 figure;
-subplot(1, 2, 1)
+subplot(2, 2, 1)
 plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
 plot(ynn_ff, 'x', MarkerSize=10);
-legend ('Target','Output');
+legend ('Target','Output','Location', 'Best');
 title('Newff', ['MSE = ', num2str(mean(((out_data_train'-ynn_ff).^2)))]);
 
 % newelm
@@ -151,13 +151,48 @@ siec_elm.trainParam.goal = 1e-5;
 siec_elm = train(siec_elm, in_data_train', out_data_train');
 ynn_elm = sim(siec_elm, in_data_train');
 
-subplot(1, 2, 2)
+subplot(2, 2, 2)
 plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
 plot(ynn_elm, 'x', MarkerSize=10);
-legend ('Target','Output');
+legend ('Target','Output','Location', 'Best');
 title('Newelm', ['MSE = ', num2str(mean(((out_data_train'-ynn_elm).^2)))]);
 
-%% newrb
+% newrb
+MN = 10;
+DF = 5;
+GOAL = 0;
+SPREAD = 0.1;
+
+NN_rb = newrb(in_data_train', out_data_train', GOAL, SPREAD, MN, DF);
+yNN_rb = sim(NN_rb, in_data_train');
+
+h = findobj('type','figure','name','NEWRB');
+if ~isempty(h)
+    close(h);
+end
+
+subplot(2, 2, 3)
+plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
+plot(yNN_rb, 'x', MarkerSize=10);
+legend ('Target','Output','Location', 'Best');
+title('Newrb', ['MSE = ', num2str(mean(((out_data_train'-yNN_rb).^2)))]);
+
+% newrbe
+NN_rbe = newrbe(in_data_train', out_data_train', SPREAD);
+yNN_rbe = sim(NN_rbe, in_data_train');
+
+h = findobj('type','figure','name','NEWRB');
+if ~isempty(h)
+    close(h);
+end
+
+subplot(2, 2, 4)
+plot(out_data_train, 'o', MarkerSize=10); hold on; grid;
+plot(yNN_rbe, 'x', MarkerSize=10);
+legend ('Target','Output','Location', 'Best');
+title('Newrbe', ['MSE = ', num2str(mean(((out_data_train'-yNN_rbe).^2)))]);
+
+%% Analiza newrb
 MN_values = [1, 5, 10, 50];
 DF = 5;
 GOAL = 0;
@@ -187,7 +222,7 @@ for SPREAD = SPREAD_values
     sgtitle(['Analiza maksymalnej liczby neuronów (MN) sieci radialnej newrb dla SPREAD = ', num2str(SPREAD)]);
 end
 
-%% newrbe
+%% Analiza newrbe
 idx = 1;
 figure;
 for SPREAD = SPREAD_values

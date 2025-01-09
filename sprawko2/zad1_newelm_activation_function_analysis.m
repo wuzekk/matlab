@@ -55,7 +55,7 @@ plot(y,'b--');
 legend('target', 'input')
 mseValue2 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue1, fun_act);
+titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue2, fun_act);
 title(titleString);
 
 
@@ -78,7 +78,7 @@ plot(y,'b--');
 legend('target', 'input')
 mseValue3 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue1, fun_act);
+titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue3, fun_act);
 title(titleString);
 
 
@@ -99,8 +99,8 @@ plot(ynn_newelm,'r');
 grid; hold on;
 plot(y,'b--');
 legend('target', 'input')
-mseValue3 = mse(y,ynn_newelm);
+mseValue4 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue1, fun_act);
+titleString = sprintf('MSE = %d\nFunkcja aktywacyjna = %s',mseValue4, fun_act);
 title(titleString);
 

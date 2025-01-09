@@ -37,7 +37,7 @@ plot(y,'b--');
 legend('target', 'input')
 mseValue1 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue1, learning_met);
+titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue1, liczba_epochs);
 title(titleString);
 
 %% liczba epok 100
@@ -57,9 +57,9 @@ plot(ynn_newelm,'r');
 grid; hold on;
 plot(y,'b--');
 legend('target', 'input')
-mseValue1 = mse(y,ynn_newelm);
+mseValue2 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue1, learning_met);
+titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue2, liczba_epochs);
 title(titleString);
 
 
@@ -81,9 +81,9 @@ plot(ynn_newelm,'r');
 grid; hold on;
 plot(y,'b--');
 legend('target', 'input')
-mseValue1 = mse(y,ynn_newelm);
+mseValue3 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue1, learning_met);
+titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue3, liczba_epochs);
 title(titleString);
 
 
@@ -103,7 +103,7 @@ plot(ynn_newelm,'r');
 grid; hold on;
 plot(y,'b--');
 legend('target', 'input')
-mseValue1 = mse(y,ynn_newelm);
+mseValue4 = mse(y,ynn_newelm);
 
-titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue1, learning_met);
+titleString = sprintf('MSE = %d\nLiczba epok = %d',mseValue4, liczba_epochs);
 title(titleString);

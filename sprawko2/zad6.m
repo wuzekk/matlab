@@ -31,7 +31,6 @@ siec_newff.trainParam.epochs = 100;
 siec_newff.trainParam.goal = 0;
 
 siec_newff = train(siec_newff, X, y);
-
 ynn_newff = sim(siec_newff, X);
 
 %newelm
@@ -54,7 +53,7 @@ siec_newrbe = newrbe(X, y, SPREAD);
 ynn_newrb = sim(siec_newrb, X);
 ynn_newrbe = sim(siec_newrbe, X);
 
-%ploting
+%Ploting
 figure;
 
 %newff
@@ -80,6 +79,7 @@ title('Comparison of newrb and newrbe with Original');
 legend('Original', 'newrb', 'newrbe');
 xlabel('x');
 ylabel('y');
+
 dim = [0.4 0.10 0.3 0.2];
 str = ['MSE newrb: ', num2str(mse(y, ynn_newrb)), newline, 'MSE newrbe: ', num2str(mse(y, ynn_newrbe))];
 annotation('textbox', dim, 'String', str, 'FitBoxToText', 'on', 'BackgroundColor', 'white', 'HorizontalAlignment', 'center');

@@ -1,4 +1,3 @@
-% ja już nic więcej z tym nie zrobię, nie wiem czemu wykresy wglądają tak chujowo
 close all
 clear all
 clc

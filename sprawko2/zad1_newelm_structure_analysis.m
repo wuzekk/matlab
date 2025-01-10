@@ -83,7 +83,7 @@ siec_newelm.trainParam.goal = 0;
 siec_newelm = train(siec_newelm, X, y);
 ynn_newelm = sim(siec_newelm, X);
 
-figure(4)
+figure(3)
 plot(ynn_newelm,'r');
 grid; hold on;
 plot(y,'b--');

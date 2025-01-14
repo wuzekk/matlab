@@ -7,21 +7,35 @@ figure;
 imshow(img);
 title('Oryginalny obraz');
 
-img_converted = rgb2ind(img, 0.05);
-img_coverted = double(img_converted);
 
-k = 3;
-[clust_number, centers] = kmeans(img_converted, k);
+n_colsv = [0.05, 0.1];
+k_values = [10, 20, 50];
 
-img_clustering = zeros(size(img_coverted));
-for i=1:590
-    img_clustering(img_converted==(i-1)) = clust_number(i)*100;
+for n_cols=n_colsv
+    img_converted = rgb2ind(img, n_cols);
+    img_converted = double(img_converted);
+    
+    figure
+    image(img_converted); axis equal
+    title(['Obraz po indeksacji, n = ', num2str(n_cols)])
+
+    
+    idx = 1;
+    for k=k_values
+        [clust_number, centers] = kmeans(img_converted, k);
+        
+        img_clustering = zeros(size(img_converted));
+        for i=1:590
+            img_clustering(img_converted==(i-1)) = clust_number(i)*10;
+        end
+        
+        
+        figure
+        image(img_clustering); 
+        colorbar; title(['Obraz po klasteryzacji, k =', num2str(k)], ['Dla obrazu po idenksacji dla n = ', num2str(n_cols)])
+        idx = idx + 1;
+    end
 end
-
-figure
-image(img_clustering); axis equal
-colorbar; title(['Obraz po klasteryzacji na ', num2str(k), ' klastry'])
-
 %% Redukcja kolorow z uzyciem k-means
 % wymiary
 x = size(img, 1);

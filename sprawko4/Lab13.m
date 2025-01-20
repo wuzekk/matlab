@@ -1,74 +1,57 @@
-%% PSO
 clear; close all; clc;
 
-opt = optimoptions("particleswarm", 'PlotFcn', @pswplotbestf);
-opt.MaxIterations = 5;
-opt.SwarmSize = 10;
+% Definicja funkcji celu
+cost_fun = @(x) x.^2 + 3*x + 4;
+cost_fun_v2 = @(x) x.^2 + 3*x + 4;
+x_range = -5:0.1:5;
 
+% Zakresy testowanych parametow
+swarm_sizes = [10, 20, 50]; 
+population_sizes = [10, 20, 50]; 
+max_iterations = [5, 10, 20]; 
 
-wartosci_obliczone = particleswarm(@cost_fun, 1, -5, 5, opt);
-
-x = -10:0.1:10;
-y = cost_fun(x);
-
-figure
-plot(x, y, LineWidth=2)
-grid; hold;
-xlabel('x'); ylabel('y')
-
-qy = -50:.01:50;
-qx = ones(size(qy)) * wartosci_obliczone;
-plot(wartosci_obliczone, cost_fun(wartosci_obliczone), 'xr', MarkerSize=15, LineWidth=3);
-title('PSO')
-%% GA
-opt = optimoptions("ga", 'PlotFcn', @gaplotbestf);
-opt.MaxGenerations = 5;
-opt.PopulationSize = 10;
-
-[wartosci_wyznaczone] = ga(@cost_fun, 1, [],[],[],[], -5, 5, [], opt);
-
-figure
-plot(x, y, LineWidth=2,Color='g')
-grid; hold;
-xlabel('x'); ylabel('y')
-
-qy = -50:.01:50;
-qx = ones(size(qy)) * wartosci_wyznaczone;
-plot(wartosci_wyznaczone, cost_fun(wartosci_wyznaczone), 'xm', MarkerSize=15, LineWidth=3);
-title('GA')
-
-%% 
-close all; clear;
 % PSO
-opt = optimoptions("particleswarm", 'PlotFcn', @pswplotbestf);
-opt.MaxIterations = 10;
-opt.SwarmSize = 10;
+figure; 
+subplot_index = 1;
 
-wartosci_obliczone = particleswarm(@cost_fun3, 2, [-5 -5], [5 5], opt);
+for i = 1:length(swarm_sizes)
+    for j = 1:length(max_iterations)
+        opt_pso = optimoptions("particleswarm", 'Display','off');
+        opt_pso.MaxIterations = max_iterations(j);
+        opt_pso.SwarmSize = swarm_sizes(i);
+        [pso_result, pso_fval] = particleswarm(cost_fun_v2, 1, -5, 5, opt_pso);
 
+        subplot(length(swarm_sizes), length(max_iterations), subplot_index);
+        plot(x_range, cost_fun_v2(x_range), 'LineWidth', 2);
+        hold on;
+        plot(pso_result, pso_fval, 'xr', 'MarkerSize', 10, 'LineWidth', 2); 
+        title(['PSO: S=', num2str(swarm_sizes(i)), ', I=', num2str(max_iterations(j)), ', Min=', num2str(pso_fval)]);
+        xlabel('x'); ylabel('f(x)'); grid on; hold off;
+        subplot_index = subplot_index + 1;
+    end
+end
 
-figure
-fsurf(@(x1, x2) x1.*exp(-(sin(x1).^2+x2.^2))); grid; hold; box
-
-cost_fun3([wartosci_obliczone(1) wartosci_obliczone(2)])
-plot3(wartosci_obliczone(1), wartosci_obliczone(2), cost_fun3([wartosci_obliczone(1) wartosci_obliczone(2)]), 'xr', MarkerSize=15, LineWidth=3)
-title('PSO')
 
 % GA
-opt = optimoptions("ga", 'PlotFcn', @gaplotbestf);
-opt.MaxGenerations = 5;
-opt.PopulationSize = 10;
+figure;
+subplot_index = 1;
 
-[wartosci_wyznaczone] = ga(@cost_fun3, 2, [],[],[],[], [-5 -5], [5 5], [], opt);
+for i = 1:length(population_sizes)
+    for j = 1:length(max_iterations)
+        opt_ga = optimoptions("ga", 'Display','off');
+        opt_ga.MaxGenerations = max_iterations(j);
+        opt_ga.PopulationSize = population_sizes(i);
+        [ga_result, ga_fval] = ga(cost_fun, 1, [],[],[],[], -5, 5, [], opt_ga);
 
-figure
-fsurf(@(x1, x2) x1.*exp(-(sin(x1).^2+x2.^2))); grid; hold; box
-
-cost_fun3([wartosci_obliczone(1) wartosci_obliczone(2)])
-plot3(wartosci_obliczone(1), wartosci_obliczone(2), cost_fun3([wartosci_obliczone(1) wartosci_obliczone(2)]), 'xr', MarkerSize=15, LineWidth=3)
-title('GA')
-
-
+        subplot(length(population_sizes), length(max_iterations), subplot_index);
+        plot(x_range, cost_fun(x_range), 'g', 'LineWidth', 2);
+        hold on;
+        plot(ga_result, ga_fval, 'xm', 'MarkerSize', 10, 'LineWidth', 2); 
+        title(['GA: P=', num2str(population_sizes(i)), ', I=', num2str(max_iterations(j)), ', Min=', num2str(ga_fval)]);
+        xlabel('x'); ylabel('f(x)'); grid on; hold off;
+        subplot_index = subplot_index + 1;
+    end
+end
 
 
 

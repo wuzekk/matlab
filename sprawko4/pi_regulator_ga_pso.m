@@ -19,6 +19,8 @@ plot(t, omega, 'r');
 xlabel('t [s]');
 ylabel('\omega [p.u.]');
 legend('init', 'optim');
+title(['GA Optimization Result: ', num2str(wartosc_f_ga)]);
+grid on;
 
 %pso
 opt = optimoptions("particleswarm", 'PlotFcn', @pswplotbestf);
@@ -37,3 +39,4 @@ plot(t, omega, 'r');
 xlabel('t [s]');
 ylabel('\omega [p.u.]');
 legend('init', 'optim');
+title(['PSO Optimization Result: ', num2str(wartosc_f_pso)]);

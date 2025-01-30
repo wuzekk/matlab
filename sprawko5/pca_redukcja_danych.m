@@ -8,13 +8,13 @@ data = [x1, x2];
 [coeff, score, latent, tsquared, explained, mu] = pca(data, "NumComponents", 1);
 data_pca = score * coeff' + mu;
 figure(1)
-plot(data(:, 1), data(:, 2), 'or', 'MarkerSize', 7, 'LineWidth', 3');
+plot(data, 'or', 'LineWidth', 3);
 grid;
 hold on;
-plot(data_pca(:, 1), data_pca(:, 2), 'xb', 'MarkerSize', 7, 'LineWidth', 3');
+plot(data_pca, 'ob', 'LineWidth', 3);
 xlabel('x');
 ylabel('y');
-legend('input data', 'pca');
+legend('input data1', 'input data2', 'pca1', 'pca2');
 
 clc
 disp('size of initial data:')
